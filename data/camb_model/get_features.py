@@ -14,7 +14,8 @@ def get_features(data, name):
     df = df.drop(columns=['parse', 'count', 'split', 'original phrase',
                           'total_native', 'total_non_native', 'native_complex', 'non_native_complex',
                           'complex_binary', 'complex_probabilistic'])
-    df.to_csv('features/' + name + '_features.csv', index=False)
+    df.to_csv('features/' + name + '_features.csv',
+              index=False, encoding='utf-8-sig')
     return df
 
 

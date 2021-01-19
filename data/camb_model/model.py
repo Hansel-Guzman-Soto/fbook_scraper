@@ -23,6 +23,13 @@ import sys
 
 
 ##########################################################################################################
+# import wandb
+# wandb.init(project="visualize-sklearn")
+# https://docs.wandb.ai/quickstart
+# https://docs.wandb.ai/integrations/scikit
+
+
+##########################################################################################################
 
 
 """
@@ -275,6 +282,31 @@ phon = Pipeline([
     ('standard', StandardScaler())
 ])
 
+KFCAT = Pipeline([
+    ('selector', NumberSelector(key='KFCAT')),
+    ('standard', StandardScaler())
+])
+
+KFSMP = Pipeline([
+    ('selector', NumberSelector(key='KFSMP')),
+    ('standard', StandardScaler())
+])
+
+KFFRQ = Pipeline([
+    ('selector', NumberSelector(key='KFFRQ')),
+    ('standard', StandardScaler())
+])
+
+NPHN = Pipeline([
+    ('selector', NumberSelector(key='NPHN')),
+    ('standard', StandardScaler())
+])
+
+TLFRQ = Pipeline([
+    ('selector', NumberSelector(key='TLFRQ')),
+    ('standard', StandardScaler())
+])
+
 # score = Pipeline([
 #     ('selector', NumberSelector(key='score')),
 #     ('standard', StandardScaler())
@@ -301,9 +333,14 @@ feats = FeatureUnion([  # ('ff',first_fixation),
     ('cald', cald),
     ('aoa', aoa),
     ('cnc', conc),
-    ('FAM', fam),
+    ('fam', fam),
     ('img', img),
     ('phon', phon),
+    ('KFCAT', KFCAT),
+    ('KFSMP', KFSMP),
+    ('KFFRQ', KFFRQ),
+    ('NPHN', NPHN),
+    ('TLFRQ', TLFRQ)
     # ('score', score)
 ])
 

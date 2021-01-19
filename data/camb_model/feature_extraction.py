@@ -32,8 +32,7 @@ if __name__ == "__main__":
         array = ['WikiNews_Train', 'WikiNews_Test', 'News_Train',
                  'News_Test', 'Wikipedia_Train', 'Wikipedia_Test']
     if (args.wikipedia == 1):
-        array += ['Wikipedia_Train', 'Wikipedia_Test']
-        # array += ['Wikipedia_Test']
+        array += 'Wikipedia_Train', 'Wikipedia_Test'
     if (args.wikinews == 1):
         array += 'WikiNews_Train', 'WikiNews_Test'
     if (args.news == 1):
@@ -47,7 +46,7 @@ for x in array:
 
     location = 'training_data/'+x+'.tsv'
     data_frame = pd.read_table(location, names=('ID', 'sentence', 'start_index', 'end_index', 'phrase', 'total_native',
-                                                'total_non_native', 'native_complex', 'non_native_complex', 'complex_binary', 'complex_probabilistic'))
+                                                'total_non_native', 'native_complex', 'non_native_complex', 'complex_binary', 'complex_probabilistic'), encoding='utf-8-sig')
 
     data_frame['split'] = data_frame['phrase'].apply(lambda x: x.split())
 
@@ -191,9 +190,9 @@ for x in array:
                               [0]['tokens'][i]['pos'])
                         return parse['sentences'][0]['tokens'][i]['pos']
                 except:
-                    return "NN"
+                    pass
         except:
-            return "NN"
+            return None
 
 ###########################################################################################################
 
@@ -400,7 +399,7 @@ for x in array:
             return y
 
 ##########################################################################################################
-
+    # get rid?
     def FAM_fun(word):
 
         table = mrc_features[mrc_features['word'] == word.upper()]
@@ -667,8 +666,8 @@ for x in array:
     print('get rest of mrc')
     word_parse_features['KFCAT'] = word_parse_features['lemma'].apply(
         lambda x: KFCAT_fun(x))
-    word_parse_features['FAM'] = word_parse_features['lemma'].apply(
-        lambda x: FAM_fun(x))
+    # word_parse_features['FAM'] = word_parse_features['lemma'].apply(
+    #     lambda x: FAM_fun(x))
     word_parse_features['KFSMP'] = word_parse_features['lemma'].apply(
         lambda x: KFSMP_fun(x))
     word_parse_features['KFFRQ'] = word_parse_features['lemma'].apply(
